@@ -66,12 +66,19 @@
         const redirectPath = urlParams.get('redirect');
         const button = document.getElementById('redirectBtn');
         const pathDisplay = document.getElementById('redirectPath');
+        
         if (redirectPath) {
-            // Display the redirect path
-            pathDisplay.textContent = Redirecting to: ${redirectPath};
+            // Correct string interpolation for displaying the redirect path
+            pathDisplay.textContent = `Redirecting to: ${redirectPath}`;
+            
             // Add click handler to redirect
             button.addEventListener('click', function() {
-                window.location.href = redirectPath;
+                // Make sure the redirect path is complete
+                if (redirectPath) {
+                    window.location.href = `https://${redirectPath}`;
+                } else {
+                    pathDisplay.innerHTML = '<span class="error">Invalid redirect path</span>';
+                }
             });
         } else {
             // No redirect parameter provided
