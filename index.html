@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            margin: 0 0 1.5rem 0;
+            color: #333;
+        }
+        .redirect-button {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .redirect-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .redirect-button:active {
+            transform: translateY(0);
+        }
+        .redirect-path {
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .error {
+            color: #E74C3C;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Redirect</h1>
+        <button class="redirect-button" id="redirectBtn">Continue</button>
+        <div class="redirect-path" id="redirectPath"></div>
+    </div>
+    <script>
+        // Get the redirect parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectPath = urlParams.get('redirect');
+        const button = document.getElementById('redirectBtn');
+        const pathDisplay = document.getElementById('redirectPath');
+        if (redirectPath) {
+            // Display the redirect path
+            pathDisplay.textContent = Redirecting to: ${redirectPath};
+            // Add click handler to redirect
+            button.addEventListener('click', function() {
+                window.location.href = redirectPath;
+            });
+        } else {
+            // No redirect parameter provided
+            pathDisplay.innerHTML = '<span class="error">No redirect parameter provided</span>';
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            button.style.cursor = 'not-allowed';
+        }
+    </script>
+</body>
+</html>
