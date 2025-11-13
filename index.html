@@ -75,7 +75,7 @@
             button.addEventListener('click', function() {
                 // Make sure the redirect path is complete
                 if (redirectPath) {
-                    window.location.href = `https://${redirectPath}`;
+                    window.location.href = `${redirectPath}`;
                 } else {
                     pathDisplay.innerHTML = '<span class="error">Invalid redirect path</span>';
                 }
